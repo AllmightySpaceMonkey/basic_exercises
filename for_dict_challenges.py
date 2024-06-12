@@ -12,8 +12,16 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Петя'},
 ]
-# ???
+names = dict()
 
+for student in students:
+    if student['first_name'] not in names:
+        names[student['first_name']] = 1
+    else:
+        names[student['first_name']] += 1
+
+for name, count in names.items():
+    print(f'{name}: {count}')
 
 # Задание 2
 # Дан список учеников, нужно вывести самое часто повторящееся имя
@@ -26,7 +34,24 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Оля'},
 ]
-# ???
+
+names = dict()
+
+for student in students:
+    if student['first_name'] not in names:
+        names[student['first_name']] = 1
+    else:
+        names[student['first_name']] += 1
+
+max_count = 0
+max_name = ''
+for name, count in names.items():
+    if count > max_count:
+        max_count = count
+        max_name = name
+
+print(f'Cамое частое имя среди участников: {max_name}')
+
 
 
 # Задание 3
@@ -51,8 +76,28 @@ school_students = [
         {'first_name': 'Саша'},
     ],
 ]
-# ???
 
+classes_qty = 0
+for students in school_students:
+
+    names = dict()
+    
+    for student in students:
+        if student['first_name'] not in names:
+            names[student['first_name']] = 1
+        else:
+            names[student['first_name']] += 1
+
+    max_count = 0
+    max_name = ''
+    for name, count in names.items():
+        if count > max_count:
+            max_count = count
+            max_name = name
+
+    classes_qty += 1
+
+    print(f'Cамое частое имя в классе {classes_qty}: {max_name}')
 
 # Задание 4
 # Для каждого класса нужно вывести количество девочек и мальчиков в нём.
@@ -72,6 +117,18 @@ is_male = {
     'Миша': True,
     'Даша': False,
 }
+
+for study_class in school:
+    male_qty = 0
+    female_qty = 0
+    for student in study_class['students']:
+        if is_male[student['first_name']]:
+            male_qty += 1
+        else:
+            female_qty += 1
+
+    print(f"Класс {study_class['class']}: девочки {female_qty}, мальчики {male_qty}")
+
 # ???
 
 
@@ -91,5 +148,18 @@ is_male = {
     'Олег': True,
     'Миша': True,
 }
-# ???
 
+male_qty = 0
+female_qty = 0
+
+for study_class in school:
+    for student in study_class['students']:
+        if is_male[student['first_name']]:
+            male_qty += 1
+        else:
+            female_qty += 1
+
+    if male_qty > female_qty:
+        print(f'Больше всего мальчиков в классе {study_class["class"]}')
+    else:
+        print(f'Больше всего девочек в классе {study_class["class"]}')
